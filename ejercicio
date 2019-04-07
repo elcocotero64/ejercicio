@@ -1,0 +1,101 @@
+package vehiculo;
+import java.text.DecimalFormat;
+
+/**
+ *
+ * @author Federico
+ */
+public class Vehiculo
+{
+
+    String tipo;
+    String marca;
+    String modelo;
+    int puertas;
+    int cilindrada;
+    double precio;
+    
+    public Vehiculo(String tipoVe, String marcaVe, String modeloVe, 
+    int puertasVe, int cilindradaVe, double precioVe) 
+    {
+        // parameter value assigned to the field
+        tipo = tipoVe;
+        marca = marcaVe;
+        modelo = modeloVe;
+        puertas = puertasVe;
+        cilindrada = cilindradaVe;
+        precio = precioVe;
+    }
+    
+    public static void main(String[] args) 
+    {
+        
+        DecimalFormat f = new DecimalFormat("###,###.00");
+        f.applyLocalizedPattern("###.###,00");
+        
+        Vehiculo n0 = new Vehiculo("auto", "Peugeot", "206", 4, 0, 200000);
+        Vehiculo n1 = new Vehiculo("moto", "Honda", "Titan", 0, 125, 60000);
+        Vehiculo n2 = new Vehiculo("auto", "Peugeot", "208", 5, 0, 250000);
+        Vehiculo n3 = new Vehiculo("moto", "Yamaha", "YBR", 0, 160, 80500.50);
+        
+        Vehiculo[] listaVe = {n0, n1, n2, n3};
+        Vehiculo[] listaVeOrd = {n0, n1, n2, n3};
+        
+        Vehiculo vehiculoCaro = listaVe[0];
+        Vehiculo vehiculoBarato = listaVe[0];
+        Vehiculo vehiculoY = null;
+        
+        for (int i = 0; i < listaVe.length; i++)
+        {   
+            
+            
+            if (listaVe[i].tipo.equals("auto"))
+            {
+                System.out.println("Marca: " + listaVe[i].marca + " // " + 
+                "Modelo: " + listaVe[i].modelo + " // " + 
+                "Puertas: " + listaVe[i].puertas + " // " + 
+                "Precio: $" + f.format(listaVe[i].precio));
+            }
+            else
+            {
+                System.out.println("Marca: " + listaVe[i].marca + " // " + 
+                "Modelo: " + listaVe[i].modelo + " // " + 
+                "Cilindrada: " + listaVe[i].cilindrada + "c // " + 
+                "Precio: $" + f.format(listaVe[i].precio));
+            }
+            
+            if (i == 0)
+            { 
+            }           
+            else
+            {
+                if (listaVe[i].precio > vehiculoCaro.precio)
+                {
+                    vehiculoCaro = listaVe[i];
+                }
+                if (listaVe[i].precio < vehiculoBarato.precio)
+                {
+                    vehiculoBarato = listaVe[i];
+                }
+            }
+            
+            if (listaVe[i].modelo.indexOf('Y') != -1)
+            {
+                vehiculoY = listaVe[i];    
+            }
+            
+        }
+        System.out.println("=============================");
+        System.out.println("Vehículo más caro: " + vehiculoCaro.marca + " " + 
+        vehiculoCaro.modelo);
+        System.out.println("Vehículo más barato: " + vehiculoBarato.marca + 
+        " " + vehiculoBarato.modelo);
+        
+        if (vehiculoY != null)
+        {
+            System.out.println("Vehículo que contiene en el modelo la letra ‘Y’: " 
+            + vehiculoY.marca + " " + vehiculoY.modelo + " $" + f.format(vehiculoY.precio));
+        }
+    }
+        
+}
